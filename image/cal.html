@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #7FD7F7; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            background:black;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(185, 21, 136, 0.3);
+        }
+
+        .display {
+            background: #E0E0E0;
+            height: 50px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            color: #da1c1c;
+            border: none;
+            width: 100%;
+        }
+
+        table {
+            border-spacing: 8px;
+        }
+
+        button {
+            width: 60px;
+            height: 50px;
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            background: #D9D9D9;
+            color: #dd1111;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:active {
+            opacity: 0.6;
+        }
+
+        .btn-clear {
+            background: #FF0000;
+            color: white;
+        }
+
+        .btn-equals {
+            background: pink;
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" readonly value="0">
+        <table>
+            <tr>
+                <td><button onclick="appendValue('7')">7</button></td>
+                <td><button onclick="appendValue('8')">8</button></td>
+                <td><button onclick="appendValue('9')">9</button></td>
+                <td><button onclick="appendValue('/')">/</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendValue('4')">4</button></td>
+                <td><button onclick="appendValue('5')">5</button></td>
+                <td><button onclick="appendValue('6')">6</button></td>
+                <td><button onclick="appendValue('*')">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendValue('1')">1</button></td>
+                <td><button onclick="appendValue('2')">2</button></td>
+                <td><button onclick="appendValue('3')">3</button></td>
+                <td><button onclick="appendValue('-')">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendValue('.')">.</button></td>
+                <td><button onclick="appendValue('0')">0</button></td>
+                <td><button onclick="appendValue('+')">+</button></td>
+                <td><button class="btn-clear" onclick="clearDisplay()">C</button></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button class="btn-equals" onclick="calculate()">=</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function appendValue(val) {
+            if (display.value === '0' && val !== '.') {
+                display.value = val;
+            } else {
+                display.value += val;
+            }
+        }
+
+        function clearDisplay() {
+            display.value = '0';
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+                setTimeout(clearDisplay, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
